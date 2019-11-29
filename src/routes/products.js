@@ -1,17 +1,18 @@
 const express = require("express");
-
+const jwt = require("express-jwt");
 const productsRoute = express.Router();
+const secret = { secret: process.env.SECRET || "example1234" };
 
-productsRoute.get("/", (req, res) => {
+productsRoute.get("/", jwt(secret), (req, res) => {
   //Get all products
   res.send({ ok: "ok" });
 });
 
-productsRoute.post("/", () => {
+productsRoute.post("/", jwt(secret), () => {
   //Post new product
 });
 
-productsRoute.delete("/", () => {
+productsRoute.delete("/", jwt(secret), () => {
   //Delete product
 });
 
