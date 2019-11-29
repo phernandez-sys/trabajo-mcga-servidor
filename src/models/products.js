@@ -21,11 +21,17 @@ const productsSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true
+    },
+    amount: {
+      type: Number,
+      required: true
     }
   },
   {
     timestamps: { createdAt: true, updatedAt: false }
   }
 );
+
+productsSchema.index({ code: 1 }, { unique: true });
 
 module.exports = mongoose.model("products", productsSchema);
